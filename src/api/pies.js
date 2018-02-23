@@ -31,3 +31,36 @@ export const listPiesOfTheDay = async () => {
 export const getQuantityDescription = quantity => {
   return quantity > 1 ? `per ${quantity} pieces` : 'per piece'
 }
+
+// Sort Pies by Price Ascending
+export const sortPiesByPriceAscending = (pies) => {
+  return [...pies].sort( (a, b) => {
+    return a.price - b.price
+  })
+}
+
+// Sort Pies by Price Descending
+export const sortPiesByPriceDescending = (pies) => {
+  return [...pies].sort( (a, b) => {
+    return b.price - a.price
+  })
+}
+
+// Sort Pies
+export const sortPies = (pies, sortKey) => {
+  switch (sortKey) {
+    case 'priceAsc':
+      return sortPiesByPriceAscending(pies)
+    case 'priceDesc':    
+      return sortPiesByPriceDescending(pies)
+    default:
+      return sortPiesByPriceAscending(pies)
+  }
+}
+
+// Search Pies
+export const searchPies = (pies, searchKey) => {
+  return pies.filter(pie => {
+    return pie.displayName.toLowerCase().match(searchKey.toLowerCase())
+  })
+}
