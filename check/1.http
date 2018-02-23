@@ -1,0 +1,10 @@
+@base_url = https://pie.now.sh
+
+### All stores
+GET {{base_url}}/stores
+
+### All pies
+GET {{base_url}}/pies
+
+### Specific store
+GET {{base_url}}/stores/1/pies
