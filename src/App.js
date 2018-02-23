@@ -3,7 +3,7 @@ import './bootstrap-4/css/bootstrap.min.css'
 import './App.css'
 
 // API
-import { listPiesOfTheDay } from './api/pies'
+import { listPiesOfTheDay, sortPies, searchPies } from './api/pies'
 import { listStores } from './api/stores'
 
 // Components
@@ -12,9 +12,11 @@ import Pagination from './components/Pagination'
 
 class App extends Component {
   state = {
-    // isMounted: false,
     pies: [],
     stores: [],
+    searchKey: '',
+    sortKey: 'priceAsc',
+    filteredPies: [],
     pagination: {
       start: 0,
       end: 5,
@@ -25,7 +27,7 @@ class App extends Component {
   }
 
   // Handle Pagination
-  changePage = page => {
+  onChangePage = page => {
     this.setState(prevState => {
       // Calculate page start
       const pageStart = page * prevState.pagination.itemsPerPage
@@ -43,11 +45,44 @@ class App extends Component {
     })
   }
 
+  // Handle search and sort
+  onFilter = () => {
+    this.setState(prevState => {
+      const searchKey = prevState.searchKey
+      const sortKey = prevState.sortKey
+      // Sort the Pies
+      const sortedPies = sortPies(prevState.pies, sortKey)
+      console.log(sortedPies)
+      // Search Pie by Name
+      const filteredPies = searchPies(sortedPies, searchKey)
+      console.log(filteredPies)
+      return {
+        filteredPies: filteredPies
+      }
+    })
+  }
+
+  // On search, store the sort key to state then handle both search/sort filters
+  onSearch = event => {
+    this.setState({
+      searchKey: event.target.value
+    })
+    this.onFilter()
+  }
+
+  // On sort, store the sort key to state then handle both search/sort filters
+  onSort = event => {
+    this.setState({
+      sortKey: event.target.value
+    })
+    this.onFilter()
+  }
+
   // Fetch Data from API
   fetchData = async () => {
     try {
       this.setState({
-        pies: await listPiesOfTheDay(),
+        pies: sortPies(await listPiesOfTheDay()),
         // pies:[{"id":1,"storeId":1,"displayName":"Beef","quantity":5,"price":300,"priceString":"$3.00","isPieOfTheDay":true},{"id":1,"storeId":2,"displayName":"Beef and curry","quantity":1,"price":250,"priceString":"$2.50","isPieOfTheDay":true},{"id":1,"storeId":3,"displayName":"Beef and curry","quantity":1,"price":200,"priceString":"$2.00","isPieOfTheDay":true},{"id":1,"storeId":4,"displayName":"Beef and curry","quantity":1,"price":280,"priceString":"$2.80","isPieOfTheDay":true},{"id":1,"storeId":6,"displayName":"Beef","quantity":3,"price":230,"priceString":"$2.30","isPieOfTheDay":true},{"id":1,"storeId":7,"displayName":"Beef and mushroom","quantity":1,"price":250,"priceString":"$2.50","isPieOfTheDay":true},{"id":1,"storeId":1,"displayName":"Beef","quantity":5,"price":300,"priceString":"$3.00","isPieOfTheDay":true},{"id":1,"storeId":2,"displayName":"Beef and curry","quantity":1,"price":250,"priceString":"$2.50","isPieOfTheDay":true},{"id":1,"storeId":3,"displayName":"Beef and curry","quantity":1,"price":200,"priceString":"$2.00","isPieOfTheDay":true},{"id":1,"storeId":4,"displayName":"Beef and curry","quantity":1,"price":280,"priceString":"$2.80","isPieOfTheDay":true},{"id":1,"storeId":6,"displayName":"Beef","quantity":3,"price":230,"priceString":"$2.30","isPieOfTheDay":true},{"id":1,"storeId":7,"displayName":"Beef and mushroom","quantity":1,"price":250,"priceString":"$2.50","isPieOfTheDay":true},{"id":1,"storeId":1,"displayName":"Beef","quantity":5,"price":300,"priceString":"$3.00","isPieOfTheDay":true},{"id":1,"storeId":2,"displayName":"Beef and curry","quantity":1,"price":250,"priceString":"$2.50","isPieOfTheDay":true},{"id":1,"storeId":3,"displayName":"Beef and curry","quantity":1,"price":200,"priceString":"$2.00","isPieOfTheDay":true},{"id":1,"storeId":4,"displayName":"Beef and curry","quantity":1,"price":280,"priceString":"$2.80","isPieOfTheDay":true},{"id":1,"storeId":6,"displayName":"Beef","quantity":3,"price":230,"priceString":"$2.30","isPieOfTheDay":true},{"id":1,"storeId":7,"displayName":"Beef and mushroom","quantity":1,"price":250,"priceString":"$2.50","isPieOfTheDay":true},{"id":1,"storeId":1,"displayName":"Beef","quantity":5,"price":300,"priceString":"$3.00","isPieOfTheDay":true},{"id":1,"storeId":2,"displayName":"Beef and curry","quantity":1,"price":250,"priceString":"$2.50","isPieOfTheDay":true},{"id":1,"storeId":3,"displayName":"Beef and curry","quantity":1,"price":200,"priceString":"$2.00","isPieOfTheDay":true},{"id":1,"storeId":4,"displayName":"Beef and curry","quantity":1,"price":280,"priceString":"$2.80","isPieOfTheDay":true},{"id":1,"storeId":6,"displayName":"Beef","quantity":3,"price":230,"priceString":"$2.30","isPieOfTheDay":true},{"id":1,"storeId":7,"displayName":"Beef and mushroom","quantity":1,"price":250,"priceString":"$2.50","isPieOfTheDay":true},{"id":1,"storeId":1,"displayName":"Beef","quantity":5,"price":300,"priceString":"$3.00","isPieOfTheDay":true},{"id":1,"storeId":2,"displayName":"Beef and curry","quantity":1,"price":250,"priceString":"$2.50","isPieOfTheDay":true},{"id":1,"storeId":3,"displayName":"Beef and curry","quantity":1,"price":200,"priceString":"$2.00","isPieOfTheDay":true},{"id":1,"storeId":4,"displayName":"Beef and curry","quantity":1,"price":280,"priceString":"$2.80","isPieOfTheDay":true},{"id":1,"storeId":6,"displayName":"Beef","quantity":3,"price":230,"priceString":"$2.30","isPieOfTheDay":true},{"id":1,"storeId":7,"displayName":"Beef and mushroom","quantity":1,"price":250,"priceString":"$2.50","isPieOfTheDay":true},{"id":1,"storeId":1,"displayName":"Beef","quantity":5,"price":300,"priceString":"$3.00","isPieOfTheDay":true},{"id":1,"storeId":2,"displayName":"Beef and curry","quantity":1,"price":250,"priceString":"$2.50","isPieOfTheDay":true},{"id":1,"storeId":3,"displayName":"Beef and curry","quantity":1,"price":200,"priceString":"$2.00","isPieOfTheDay":true},{"id":1,"storeId":4,"displayName":"Beef and curry","quantity":1,"price":280,"priceString":"$2.80","isPieOfTheDay":true},{"id":1,"storeId":6,"displayName":"Beef","quantity":3,"price":230,"priceString":"$2.30","isPieOfTheDay":true},{"id":1,"storeId":7,"displayName":"Beef and mushroom","quantity":1,"price":250,"priceString":"$2.50","isPieOfTheDay":true}],
         stores: await listStores(),
         error: null
@@ -68,20 +103,31 @@ class App extends Component {
 
   render = () => {
     // Get variables from app state
-    const { pies, stores, pagination } = this.state
+    const { pies, filteredPies, stores, pagination } = this.state
     // Limit number of displayed Pies
-    const piePage = pies.slice(pagination.start, pagination.end)
+    const piePage =
+      filteredPies.length > 0
+        ? filteredPies.slice(pagination.start, pagination.end)
+        : pies.slice(pagination.start, pagination.end)
 
     return (
       <div className="App">
         <div className="container">
           <h1 className="lobster text-center apptitle">Pie of the Day</h1>
-          {!!pies && !!stores && <PieList pies={piePage} stores={stores} />}
+          {!!pies &&
+            !!stores && (
+              <PieList
+                pies={piePage}
+                stores={stores}
+                onSearch={this.onSearch}
+                onSort={this.onSort}
+              />
+            )}
           {!!pies && (
             <Pagination
               pagination={pagination}
               listLength={pies.length}
-              changePage={this.changePage}
+              onChangePage={this.onChangePage}
             />
           )}
         </div>
