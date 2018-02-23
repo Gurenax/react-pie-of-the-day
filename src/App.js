@@ -112,8 +112,10 @@ class App extends Component {
 
     return (
       <div className="App">
-        <div className="container">
-          <h1 className="lobster text-center apptitle">Pie of the Day</h1>
+        <h1 className="lobster text-center apptitle">
+          <span className="align-middle">Pie of the Day</span>
+        </h1>
+        <div className="container mt-4">
           {!!pies &&
             !!stores && (
               <PieList
