@@ -1,3 +1,15 @@
+* {
+  outline: none;
+  color: #333333;
+}
+
+.apptitle {
+  font-size: 48px;
+}
+
+.pie-list {
+  max-width: 1024px;
+}
 .pie-card {
   min-width: 300px;
   max-width: 300px;
@@ -7,6 +19,12 @@
   max-width: 210px;
   overflow-wrap: break-word;
 }
+.pie-card-price {
+  font-size: 18px;
+}
+.pie-card-description {
+  font-size: 14px;
+}
 
 .raleway {
   font-family: 'Raleway', sans-serif !important;
@@ -14,4 +32,22 @@
 
 .lobster {
   font-family: 'Lobster', cursive !important;
+}
+
+
+
+.pagination-btn {
+  min-height: 40px;
+  min-width: 40px;
+  max-height: 40px;
+  max-width: 40px;
+  border-radius: 0;
+  border-color: #333333 !important;
+  background: #F2F2F2 !important;
+  margin-right: -1px;
+}
+
+.pagination-btn-selected {
+  background: #333333 !important;
+  color: #F2F2F2 !important;
 }
