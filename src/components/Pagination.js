@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Pagination = ({ pagination, listLength, changePage }) => {
+const Pagination = ({ pagination, listLength, onChangePage }) => {
   // Get number of pages
   const numberOfPages = Math.ceil(listLength / pagination.itemsPerPage)
   // Get array of pages
@@ -17,7 +17,7 @@ const Pagination = ({ pagination, listLength, changePage }) => {
         {pagination.currentPage !== 0 && (
           <button
             className="btn pagination-btn"
-            onClick={() => changePage(pagination.currentPage - 1)}
+            onClick={() => onChangePage(pagination.currentPage - 1)}
           >
             {'<'}
           </button>
@@ -30,7 +30,7 @@ const Pagination = ({ pagination, listLength, changePage }) => {
                 : 'btn pagination-btn'
             }
             key={'page' + page}
-            onClick={() => changePage(page)}
+            onClick={() => onChangePage(page)}
           >
             {page + 1}
           </button>
@@ -38,7 +38,7 @@ const Pagination = ({ pagination, listLength, changePage }) => {
         {pagination.currentPage + 1 !== numberOfPages && (
           <button
             className="btn pagination-btn"
-            onClick={() => changePage(pagination.currentPage + 1)}
+            onClick={() => onChangePage(pagination.currentPage + 1)}
           >
             {'>'}
           </button>
