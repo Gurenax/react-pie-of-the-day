@@ -11,8 +11,18 @@
   font-size: 48px;
   background: #EB5757;
 }
-.apptitle span {
+.apptitle a {
   color: #F2F2F2;
+}
+.apptitle a:hover {
+  text-decoration: none;
+}
+
+/*
+* Spinner
+*/
+.spinner {
+  color: #EB5757;
 }
 
 /*
@@ -45,6 +55,7 @@
 }
 .pie-card-description {
   font-size: 14px;
+  width: 240px;
 }
 
 /*
@@ -61,7 +72,7 @@
   margin-right: -1px;
 }
 .pagination-btn-selected {
-  background: #333333 !important;
+  background: #EB5757 !important;
   color: #F2F2F2 !important;
 }
 
@@ -75,4 +86,7 @@
   .filter-form-group {
     max-width: 300px;
   }
+}
+.custom-select {
+  background: #FFF !important;
 }

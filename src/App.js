@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Icon } from 'react-fa'
 import './bootstrap-4/css/bootstrap.min.css'
 import './App.css'
 
@@ -113,24 +114,27 @@ class App extends Component {
     return (
       <div className="App">
         <h1 className="lobster text-center apptitle">
-          <span className="align-middle">Pie of the Day</span>
+          <a href='/' className="align-middle">Pie of the Day</a>
         </h1>
         <div className="container mt-4">
-          {!!pies &&
-            !!stores && (
+          {piePage.length > 0 && stores.length > 0 && pies.length > 0 ? (
+            <div>
               <PieList
                 pies={piePage}
                 stores={stores}
                 onSearch={this.onSearch}
                 onSort={this.onSort}
               />
-            )}
-          {!!pies && (
-            <Pagination
-              pagination={pagination}
-              listLength={pies.length}
-              onChangePage={this.onChangePage}
-            />
+              <Pagination
+                pagination={pagination}
+                listLength={pies.length}
+                onChangePage={this.onChangePage}
+              />
+            </div>
+          ) : (
+            <div className='text-center mt-5'>
+              <Icon spin name="spinner" className='display-2 spinner' />
+            </div>
           )}
         </div>
       </div>

@@ -18,8 +18,8 @@ const Filters = ({ onSearch, onSort }) => (
         defaultValue="priceAsc"
         onChange={onSort}
       >
-        <option value="priceAsc">Price Ascending</option>
-        <option value="priceDesc">Price Descending</option>
+        <option value="priceAsc">Sort by price &#x25B2;</option>
+        <option value="priceDesc">Sort by price &#x25BC;</option>
       </select>
     </div>
   </div>
