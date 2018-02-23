@@ -1,5 +1,5 @@
 * {
-  outline: none;
+  outline: none !important;
   color: #333333;
 }
 
@@ -34,8 +34,6 @@
   font-family: 'Lobster', cursive !important;
 }
 
-
-
 .pagination-btn {
   min-height: 40px;
   min-width: 40px;
@@ -50,4 +48,14 @@
 .pagination-btn-selected {
   background: #333333 !important;
   color: #F2F2F2 !important;
+}
+
+.filter-form {
+  max-width: 300px;
+}
+
+@media (max-width: 767px) {
+  .filter-form-group {
+    max-width: 300px;
+  }
 }
