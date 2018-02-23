@@ -7,7 +7,7 @@ describe('Check the connectivty when endpoints are valid', () => {
     let response = null
     try {
       response = await api.get(given)
-    } catch(error) {
+    } catch (error) {
       response = error.response
     }
     expect(response.status).toBe(expected)
@@ -19,7 +19,7 @@ describe('Check the connectivty when endpoints are valid', () => {
     let response = null
     try {
       response = await api.get(given)
-    } catch(error) {
+    } catch (error) {
       response = error.response
     }
     expect(response.status).toBe(expected)
@@ -31,7 +31,7 @@ describe('Check the connectivty when endpoints are valid', () => {
     let response = null
     try {
       response = await api.get(given)
-    } catch(error) {
+    } catch (error) {
       response = error.response
     }
     expect(response.status).toBe(expected)
@@ -45,7 +45,7 @@ describe('Check the connectivty when endpoints are invalid', () => {
     let response = null
     try {
       response = await api.get(given)
-    } catch(error) {
+    } catch (error) {
       response = error.response
     }
     expect(response.status).toBe(expected)
@@ -57,7 +57,7 @@ describe('Check the connectivty when endpoints are invalid', () => {
     let response = null
     try {
       response = await api.get(given)
-    } catch(error) {
+    } catch (error) {
       response = error.response
     }
     expect(response.status).toBe(expected)
@@ -69,7 +69,7 @@ describe('Check the connectivty when endpoints are invalid', () => {
     let response = null
     try {
       response = await api.get(given)
-    } catch(error) {
+    } catch (error) {
       response = error.response
     }
     expect(response.status).toBe(expected)
