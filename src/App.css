@@ -3,10 +3,26 @@
   color: #333333;
 }
 
+/*
+* App Title
+*/
 .apptitle {
   font-size: 48px;
 }
 
+/*
+* Fonts
+*/
+.raleway {
+  font-family: 'Raleway', sans-serif !important;
+}
+.lobster {
+  font-family: 'Lobster', cursive !important;
+}
+
+/*
+* Pie List
+*/
 .pie-list {
   max-width: 1024px;
 }
@@ -26,14 +42,9 @@
   font-size: 14px;
 }
 
-.raleway {
-  font-family: 'Raleway', sans-serif !important;
-}
-
-.lobster {
-  font-family: 'Lobster', cursive !important;
-}
-
+/*
+* Pagination
+*/
 .pagination-btn {
   min-height: 40px;
   min-width: 40px;
@@ -44,16 +55,17 @@
   background: #F2F2F2 !important;
   margin-right: -1px;
 }
-
 .pagination-btn-selected {
   background: #333333 !important;
   color: #F2F2F2 !important;
 }
 
+/*
+* Filters
+*/
 .filter-form {
   max-width: 300px;
 }
-
 @media (max-width: 767px) {
   .filter-form-group {
     max-width: 300px;
