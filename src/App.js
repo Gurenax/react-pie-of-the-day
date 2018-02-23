@@ -24,8 +24,27 @@ class App extends Component {
     error: null
   }
 
+  // Handle Pagination
+  changePage = page => {
+    this.setState(prevState => {
+      // Calculate page start
+      const pageStart = page * prevState.pagination.itemsPerPage
+      // Calculate page end
+      const pageEnd = pageStart + prevState.pagination.itemsPerPage
+
+      return {
+        pagination: {
+          start: pageStart,
+          end: pageEnd,
+          itemsPerPage: prevState.pagination.itemsPerPage,
+          currentPage: page
+        }
+      }
+    })
+  }
+
+  // Fetch Data from API
   fetchData = async () => {
-    // if(this.state.isMounted){
     try {
       this.setState({
         pies: await listPiesOfTheDay(),
@@ -40,13 +59,10 @@ class App extends Component {
         error: error
       })
     }
-    // }
   }
 
+  // When App is loaded, fetch API data
   componentDidMount = () => {
-    // this.setState({
-    //   isMounted: true
-    // })
     this.fetchData()
   }
 
@@ -71,21 +87,6 @@ class App extends Component {
         </div>
       </div>
     )
-  }
-
-  changePage = page => {
-    const { pagination } = this.state
-    const pageStart = page * pagination.itemsPerPage
-    const pageEnd = pageStart + pagination.itemsPerPage
-
-    this.setState({
-      pagination: {
-        start: pageStart,
-        end: pageEnd,
-        itemsPerPage: pagination.itemsPerPage,
-        currentPage: page
-      }
-    })
   }
 }
 
