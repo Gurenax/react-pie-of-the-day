@@ -7,7 +7,12 @@
 * App Title
 */
 .apptitle {
+  height: 80px;
   font-size: 48px;
+  background: #EB5757;
+}
+.apptitle span {
+  color: #F2F2F2;
 }
 
 /*
@@ -51,8 +56,8 @@
   max-height: 40px;
   max-width: 40px;
   border-radius: 0;
-  border-color: #333333 !important;
-  background: #F2F2F2 !important;
+  border-color: #CED4DA !important;
+  background: #FFFFFF !important;
   margin-right: -1px;
 }
 .pagination-btn-selected {
