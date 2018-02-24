@@ -1,6 +1,8 @@
+// @flow
 import React from 'react'
 import { Icon } from 'react-fa'
 
+// $FlowFixMe - Pagination Component
 const Pagination = ({ pagination, listLength, onChangePage }) => {
   // Get number of pages
   const numberOfPages = Math.ceil(listLength / pagination.itemsPerPage)
@@ -20,7 +22,7 @@ const Pagination = ({ pagination, listLength, onChangePage }) => {
             className="btn pagination-btn"
             onClick={() => onChangePage(pagination.currentPage - 1)}
           >
-            <Icon name='angle-left' />
+            <Icon name="angle-left" />
           </button>
         )}
         {pages.map(page => (
@@ -41,7 +43,7 @@ const Pagination = ({ pagination, listLength, onChangePage }) => {
             className="btn pagination-btn"
             onClick={() => onChangePage(pagination.currentPage + 1)}
           >
-            <Icon name='angle-right' />
+            <Icon name="angle-right" />
           </button>
         )}
       </div>

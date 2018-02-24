@@ -1,6 +1,7 @@
+// @flow
 import api from './init'
 
-// Retrieve list of all pies
+// $FlowFixMe - Retrieve list of all pies
 export const listPies = async () => {
   try {
     // GET: all pies
@@ -11,7 +12,7 @@ export const listPies = async () => {
   }
 }
 
-// Retrieve list of pies of the day
+// $FlowFixMe - Retrieve list of pies of the day
 export const listPiesOfTheDay = async () => {
   try {
     // Fetch all pies
@@ -27,26 +28,26 @@ export const listPiesOfTheDay = async () => {
   }
 }
 
-// Get Quantity Description
+// $FlowFixMe - Get Quantity Description
 export const getQuantityDescription = quantity => {
   return quantity > 1 ? `per ${quantity} pieces` : 'per piece'
 }
 
-// Sort Pies by Price Ascending
+// $FlowFixMe - Pies by Price Ascending
 export const sortPiesByPriceAscending = (pies) => {
   return [...pies].sort( (a, b) => {
     return a.price - b.price
   })
 }
 
-// Sort Pies by Price Descending
+// $FlowFixMe - Sort Pies by Price Descending
 export const sortPiesByPriceDescending = (pies) => {
   return [...pies].sort( (a, b) => {
     return b.price - a.price
   })
 }
 
-// Sort Pies
+// $FlowFixMe - Sort Pies
 export const sortPies = (pies, sortKey) => {
   switch (sortKey) {
     case 'priceAsc':
@@ -58,7 +59,7 @@ export const sortPies = (pies, sortKey) => {
   }
 }
 
-// Search Pies
+// $FlowFixMe - Search Pies
 export const searchPies = (pies, searchKey) => {
   return pies.filter(pie => {
     return pie.displayName.toLowerCase().match(searchKey.toLowerCase())

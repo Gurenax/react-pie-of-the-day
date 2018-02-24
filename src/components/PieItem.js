@@ -1,8 +1,10 @@
+// @flow
 import React from 'react'
 import { Icon } from 'react-fa'
 import { getStoreDetails, getStoreFullAddress } from '../api/stores'
 import { getQuantityDescription } from '../api/pies'
 
+// $FlowFixMe - Pie Item Component
 const PieItem = ({ pie, stores }) => {
   const store = getStoreDetails(stores, pie.storeId)
   let styleRating = {}
@@ -37,11 +39,12 @@ const PieItem = ({ pie, stores }) => {
           </span>
         </p>
         <p className="card-text raleway pie-card-description">
-          <div className='d-flex d-inline'>
-            <Icon name='map-marker' className='mt-2 mr-2'/>
+          <div className="d-flex d-inline">
+            <Icon name="map-marker" className="mt-2 mr-2" />
             <div>{getStoreFullAddress(store)}</div>
           </div>
-          <Icon name='phone' className='mr-2'/>{!!store.mobile && store.mobile}
+          <Icon name="phone" className="mr-2" />
+          {!!store.mobile && store.mobile}
         </p>
       </div>
     </div>

@@ -1,5 +1,7 @@
+// @flow
 import React from 'react'
 
+// $FlowFixMe - Filters Component
 const Filters = ({ onSearch, onSort }) => (
   <div className="filter-form-group pie-list mx-auto d-flex space-between flex-column flex-md-row">
     <div className="filter-form form-group align-items-center mr-md-auto">

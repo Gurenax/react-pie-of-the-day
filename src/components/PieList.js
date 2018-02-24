@@ -1,7 +1,9 @@
+// @flow
 import React from 'react'
 import PieItem from './PieItem'
 import Filters from './Filters'
 
+// $FlowFixMe - Pie List Component
 const PieList = ({ pies, stores, onSearch, onSort }) => (
   <div>
     <Filters onSearch={onSearch} onSort={onSort} />

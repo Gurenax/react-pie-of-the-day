@@ -1,6 +1,7 @@
+// @flow
 import api from './init'
 
-// Retrieve list of all stores
+// $FlowFixMe - Retrieve list of all stores
 export const listStores = async () => {
   try {
     // GET: all stores
@@ -11,7 +12,7 @@ export const listStores = async () => {
   }
 }
 
-// Retrieve store details
+// $FlowFixMe - Retrieve store details
 export const getStoreDetails = (allStores, storeId) => {
   // Return first match
   return allStores.filter(store => {
@@ -19,7 +20,7 @@ export const getStoreDetails = (allStores, storeId) => {
   })[0]
 }
 
-// Get store full address
+// $FlowFixMe - Get store full address
 export const getStoreFullAddress = store => {
   return `${store.address}, ${store.city}, ${store.state} ${store.postcode}`
 }
