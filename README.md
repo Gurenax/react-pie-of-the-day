@@ -19,10 +19,33 @@ However, since the price of 'Pie of the day' at each shop changes each day, Jake
 
 ## Wireframes
 
+My wireframes focus on a simple yet responsive design. For the pie list, it uses a very familiar card design which includes the information about the Pie and its corresponding store. It also includes a color-coded rating marker box similar to Zomato and Rotten Tomatoes.
+
+The idea for the design is to have a listed card layout but with the features of a filterable data table which can sort data and search keywords.
+
+
+### Mobile
+![](/docs/images/Mobile.png)
+
+### Desktop
+![](/docs/images/Desktop.png)
+
+
 ## Styling Framework
+
+The styling framework used for this project is `Bootstrap 4`. Bootstrap 4 provides cross-browser compatibility and a very useful set of classes which makes styling a lot easier. The card layout also fits the design that was established in my wireframes.
+
+For the fonts, I chose to use `Lobster` for the app's heading and `Raleway` for the rest of the page. With a little bit of research, I found that this is a good combination to have in restaurant/food websites.
+
 
 ## HTTP Client
 
+The HTTP client of choice for this project is `Axios`. Among all the HTTP client libraries, Axios is the one that I am most familiar with. It provides easy setup for configurations such as base URLs and authentication tokens. It also works really well with the `async/await` syntax as it is a Promise-based HTTP client.
+
+
 ## Test Pipeline
+
+
+
 
 ## Coding Style
