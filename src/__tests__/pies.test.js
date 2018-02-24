@@ -184,10 +184,84 @@ describe('When sorting pies by price', () => {
   })
 })
 
+describe('When searching for pies', () => {
+  let data = []
+  beforeAll(() => {
+    data = [
+      {
+        id: 1,
+        storeId: 1,
+        displayName: 'Beef',
+        quantity: 5,
+        price: 300,
+        priceString: '$3.00',
+        isPieOfTheDay: true
+      },
+      {
+        id: 1,
+        storeId: 1,
+        displayName: 'Beef and curry',
+        quantity: 2,
+        price: 250,
+        priceString: '$2.50'
+      },
+      {
+        id: 1,
+        storeId: 1,
+        displayName: 'Chicken',
+        quantity: 0,
+        price: 270,
+        priceString: '$2.70'
+      }
+    ]
+  })
 
-// // Search Pies
-// export const searchPies = (pies, searchKey) => {
-//   return pies.filter(pie => {
-//     return pie.displayName.toLowerCase().match(searchKey.toLowerCase())
-//   })
-// }
+  test('It should find 1 match with name Chicken', () => {
+    const given = 'Chicken'
+    const expected = 1
+    const result = searchPies(data, given).length
+    expect(result).toEqual(expected)
+  })
+
+  test('It should find 1 exact match with name Chicken', () => {
+    const given = 'Chicken'
+    const expected = data[2].displayName
+    const result = searchPies(data, given)[0].displayName
+    expect(result).toEqual(expected)
+  })
+
+  test('It should find 2 matches with name Beef', () => {
+    const given = 'Beef'
+    const expected = 2
+    const result = searchPies(data, given).length
+    expect(result).toEqual(expected)
+  })
+
+  test('It should find 1 exact match with name Beef', () => {
+    const given = 'Beef'
+    const expected = data[0].displayName
+    const result = searchPies(data, given)[0].displayName
+    expect(result).toEqual(expected)
+  })
+
+  test('It should find 1 exact match with name Beef and Curry', () => {
+    const given = 'Beef'
+    const expected = data[1].displayName
+    const result = searchPies(data, given)[1].displayName
+    expect(result).toEqual(expected)
+  })
+
+  test('It should find no matches with name Mushroom', () => {
+    const given = 'Mushroom'
+    const expected = 0
+    const result = searchPies(data, given).length
+    expect(result).toEqual(expected)
+  })
+
+  test('It should everything on the list when search key is empty', () => {
+    const given = ''
+    const expected = data.length
+    const result = searchPies(data, given).length
+    expect(result).toEqual(expected)
+  })
+})
