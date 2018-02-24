@@ -38,14 +38,14 @@ const PieItem = ({ pie, stores }) => {
             ({getQuantityDescription(pie.quantity)})
           </span>
         </p>
-        <p className="card-text raleway pie-card-description">
+        <div className="card-text raleway pie-card-description">
           <div className="d-flex d-inline">
             <Icon name="map-marker" className="mt-2 mr-2" />
             <div>{getStoreFullAddress(store)}</div>
           </div>
           <Icon name="phone" className="mr-2" />
           {!!store.mobile && store.mobile}
-        </p>
+        </div>
       </div>
     </div>
   )
