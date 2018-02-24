@@ -59,11 +59,7 @@ class App extends Component {
       const searchKey = prevState.searchKey
       // $FlowFixMe - Get sort key from prev state
       const sortKey = prevState.sortKey
-      // $FlowFixMe - Sort the Pies
-      // const sortedPies = sortPies(prevState.pies, sortKey)
-      // // Search Pie by Name
-      // const filteredPies = searchPies(sortedPies, searchKey)
-      // // Search Pie by Name
+      // $FlowFixMe - Search Pie by Name
       const filteredPies = searchPies(prevState.pies, searchKey)
       // $FlowFixMe - Sort the Pies
       const sortedPies = sortPies(filteredPies, sortKey)
@@ -103,38 +99,24 @@ class App extends Component {
   // Fetch Data from API
   // $FlowFixMe - Turn off type annotations
   fetchData = async () => {
-    // listPiesOfTheDay().then(pies => {
-    //   listStores().then(stores => {
-    //     const sortedPies = sortPies(pies)
-    //     this.setState({
-    //       pies: sortedPies,
-    //       stores: stores,
-    //       error: null
-    //     })
-    //   })
-    //   .catch(error => {
-    //     this.setState({
-    //       error: error
-    //     })
-    //   })
-    // })
-    // .catch(error => {
-    //   this.setState({
-    //     error: error
-    //   })
-    // })
     try {
-      const sortedPies = sortPies(await listPiesOfTheDay())
+      const pies = await listPiesOfTheDay()
+      const sortedPies = sortPies(pies)
       const stores = await listStores()
+
       // $FlowFixMe - Set fetched data to state
       this.setState({
         pies: sortedPies,
         stores: stores,
-        error: null
+        error: sortedPies.error || stores.error
       })
     } catch (error) {
-      // $FlowFixMe - Set error message to state
-      throw error
+      // $FlowFixMe - Set error messages to state
+      this.setState({
+        pies: [],
+        stores: [],
+        error: error
+      })
     }
   }
 
@@ -156,10 +138,6 @@ class App extends Component {
     const listLength =
       filteredPies.length > 0 ? filteredPies.length : pies.length
 
-      console.log('piePage.length', piePage.length)
-            console.log('stores.length', stores.length)
-            console.log('pies.length', pies.length)
-            console.log('filteredPies.length', filteredPies.length)
     return (
       <div className="App">
         <h1 className="lobster text-center apptitle">
@@ -168,8 +146,7 @@ class App extends Component {
           </a>
         </h1>
         <div className="container mt-4">
-          {
-            stores.length > 0 && pies.length > 0 ? (
+          {stores.length > 0 && pies.length > 0 ? (
             <div>
               <PieList
                 pies={piePage}
