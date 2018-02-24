@@ -60,13 +60,16 @@ class App extends Component {
       // $FlowFixMe - Get sort key from prev state
       const sortKey = prevState.sortKey
       // $FlowFixMe - Sort the Pies
-      const sortedPies = sortPies(prevState.pies, sortKey)
-      console.log(sortedPies)
-      // Search Pie by Name
-      const filteredPies = searchPies(sortedPies, searchKey)
+      // const sortedPies = sortPies(prevState.pies, sortKey)
+      // // Search Pie by Name
+      // const filteredPies = searchPies(sortedPies, searchKey)
+      // // Search Pie by Name
+      const filteredPies = searchPies(prevState.pies, searchKey)
+      // $FlowFixMe - Sort the Pies
+      const sortedPies = sortPies(filteredPies, sortKey)
       // $FlowFixMe - Set filtered list to state
       return {
-        filteredPies: filteredPies
+        filteredPies: sortedPies
       }
     })
   }
@@ -76,7 +79,13 @@ class App extends Component {
   onSearch = event => {
     // $FlowFixMe - Set search key to state
     this.setState({
-      searchKey: event.target.value
+      searchKey: event.target.value,
+      pagination: {
+        start: 0,
+        end: 5,
+        itemsPerPage: 5,
+        currentPage: 0
+      }
     })
     this.onFilter()
   }
@@ -94,20 +103,38 @@ class App extends Component {
   // Fetch Data from API
   // $FlowFixMe - Turn off type annotations
   fetchData = async () => {
+    // listPiesOfTheDay().then(pies => {
+    //   listStores().then(stores => {
+    //     const sortedPies = sortPies(pies)
+    //     this.setState({
+    //       pies: sortedPies,
+    //       stores: stores,
+    //       error: null
+    //     })
+    //   })
+    //   .catch(error => {
+    //     this.setState({
+    //       error: error
+    //     })
+    //   })
+    // })
+    // .catch(error => {
+    //   this.setState({
+    //     error: error
+    //   })
+    // })
     try {
+      const sortedPies = sortPies(await listPiesOfTheDay())
+      const stores = await listStores()
       // $FlowFixMe - Set fetched data to state
       this.setState({
-        pies: sortPies(await listPiesOfTheDay()),
-        stores: await listStores(),
+        pies: sortedPies,
+        stores: stores,
         error: null
       })
     } catch (error) {
       // $FlowFixMe - Set error message to state
-      this.setState({
-        pies: [],
-        stores: [],
-        error: error
-      })
+      throw error
     }
   }
 
@@ -125,7 +152,14 @@ class App extends Component {
       filteredPies.length > 0
         ? filteredPies.slice(pagination.start, pagination.end)
         : pies.slice(pagination.start, pagination.end)
+    // Determine length of list
+    const listLength =
+      filteredPies.length > 0 ? filteredPies.length : pies.length
 
+      console.log('piePage.length', piePage.length)
+            console.log('stores.length', stores.length)
+            console.log('pies.length', pies.length)
+            console.log('filteredPies.length', filteredPies.length)
     return (
       <div className="App">
         <h1 className="lobster text-center apptitle">
@@ -134,7 +168,8 @@ class App extends Component {
           </a>
         </h1>
         <div className="container mt-4">
-          {piePage.length > 0 && stores.length > 0 && pies.length > 0 ? (
+          {
+            stores.length > 0 && pies.length > 0 ? (
             <div>
               <PieList
                 pies={piePage}
@@ -144,7 +179,7 @@ class App extends Component {
               />
               <Pagination
                 pagination={pagination}
-                listLength={pies.length}
+                listLength={listLength}
                 onChangePage={this.onChangePage}
               />
             </div>
