@@ -1,3 +1,4 @@
+// @flow
 import React, { Component } from 'react'
 import { Icon } from 'react-fa'
 import './bootstrap-4/css/bootstrap.min.css'
@@ -11,7 +12,9 @@ import { listStores } from './api/stores'
 import PieList from './components/PieList'
 import Pagination from './components/Pagination'
 
+// $FlowFixMe - Main App Component
 class App extends Component {
+  // $FlowFixMe - Cleaner style to initialise state instead of constructor
   state = {
     pies: [],
     stores: [],
@@ -28,17 +31,19 @@ class App extends Component {
   }
 
   // Handle Pagination
+  // $FlowFixMe - Turn off type annotations
   onChangePage = page => {
     this.setState(prevState => {
-      // Calculate page start
+      // $FlowFixMe - Calculate page start
       const pageStart = page * prevState.pagination.itemsPerPage
-      // Calculate page end
+      // $FlowFixMe - Calculate page end
       const pageEnd = pageStart + prevState.pagination.itemsPerPage
-
+      // $FlowFixMe - Set state is only called when list is mounted
       return {
         pagination: {
           start: pageStart,
           end: pageEnd,
+          // $FlowFixMe - itemsPerPage will never be undefined as it has initial state value
           itemsPerPage: prevState.pagination.itemsPerPage,
           currentPage: page
         }
@@ -47,16 +52,19 @@ class App extends Component {
   }
 
   // Handle search and sort
+  // $FlowFixMe - Turn off type annotations
   onFilter = () => {
     this.setState(prevState => {
+      // $FlowFixMe - Get search key from prev state
       const searchKey = prevState.searchKey
+      // $FlowFixMe - Get sort key from prev state
       const sortKey = prevState.sortKey
-      // Sort the Pies
+      // $FlowFixMe - Sort the Pies
       const sortedPies = sortPies(prevState.pies, sortKey)
       console.log(sortedPies)
       // Search Pie by Name
       const filteredPies = searchPies(sortedPies, searchKey)
-      console.log(filteredPies)
+      // $FlowFixMe - Set filtered list to state
       return {
         filteredPies: filteredPies
       }
@@ -64,7 +72,9 @@ class App extends Component {
   }
 
   // On search, store the sort key to state then handle both search/sort filters
+  // $FlowFixMe - Turn off type annotations
   onSearch = event => {
+    // $FlowFixMe - Set search key to state
     this.setState({
       searchKey: event.target.value
     })
@@ -72,7 +82,9 @@ class App extends Component {
   }
 
   // On sort, store the sort key to state then handle both search/sort filters
+  // $FlowFixMe - Turn off type annotations
   onSort = event => {
+    // $FlowFixMe - Set sort key to state
     this.setState({
       sortKey: event.target.value
     })
@@ -80,15 +92,17 @@ class App extends Component {
   }
 
   // Fetch Data from API
+  // $FlowFixMe - Turn off type annotations
   fetchData = async () => {
     try {
+      // $FlowFixMe - Set fetched data to state
       this.setState({
         pies: sortPies(await listPiesOfTheDay()),
-        // pies:[{"id":1,"storeId":1,"displayName":"Beef","quantity":5,"price":300,"priceString":"$3.00","isPieOfTheDay":true},{"id":1,"storeId":2,"displayName":"Beef and curry","quantity":1,"price":250,"priceString":"$2.50","isPieOfTheDay":true},{"id":1,"storeId":3,"displayName":"Beef and curry","quantity":1,"price":200,"priceString":"$2.00","isPieOfTheDay":true},{"id":1,"storeId":4,"displayName":"Beef and curry","quantity":1,"price":280,"priceString":"$2.80","isPieOfTheDay":true},{"id":1,"storeId":6,"displayName":"Beef","quantity":3,"price":230,"priceString":"$2.30","isPieOfTheDay":true},{"id":1,"storeId":7,"displayName":"Beef and mushroom","quantity":1,"price":250,"priceString":"$2.50","isPieOfTheDay":true},{"id":1,"storeId":1,"displayName":"Beef","quantity":5,"price":300,"priceString":"$3.00","isPieOfTheDay":true},{"id":1,"storeId":2,"displayName":"Beef and curry","quantity":1,"price":250,"priceString":"$2.50","isPieOfTheDay":true},{"id":1,"storeId":3,"displayName":"Beef and curry","quantity":1,"price":200,"priceString":"$2.00","isPieOfTheDay":true},{"id":1,"storeId":4,"displayName":"Beef and curry","quantity":1,"price":280,"priceString":"$2.80","isPieOfTheDay":true},{"id":1,"storeId":6,"displayName":"Beef","quantity":3,"price":230,"priceString":"$2.30","isPieOfTheDay":true},{"id":1,"storeId":7,"displayName":"Beef and mushroom","quantity":1,"price":250,"priceString":"$2.50","isPieOfTheDay":true},{"id":1,"storeId":1,"displayName":"Beef","quantity":5,"price":300,"priceString":"$3.00","isPieOfTheDay":true},{"id":1,"storeId":2,"displayName":"Beef and curry","quantity":1,"price":250,"priceString":"$2.50","isPieOfTheDay":true},{"id":1,"storeId":3,"displayName":"Beef and curry","quantity":1,"price":200,"priceString":"$2.00","isPieOfTheDay":true},{"id":1,"storeId":4,"displayName":"Beef and curry","quantity":1,"price":280,"priceString":"$2.80","isPieOfTheDay":true},{"id":1,"storeId":6,"displayName":"Beef","quantity":3,"price":230,"priceString":"$2.30","isPieOfTheDay":true},{"id":1,"storeId":7,"displayName":"Beef and mushroom","quantity":1,"price":250,"priceString":"$2.50","isPieOfTheDay":true},{"id":1,"storeId":1,"displayName":"Beef","quantity":5,"price":300,"priceString":"$3.00","isPieOfTheDay":true},{"id":1,"storeId":2,"displayName":"Beef and curry","quantity":1,"price":250,"priceString":"$2.50","isPieOfTheDay":true},{"id":1,"storeId":3,"displayName":"Beef and curry","quantity":1,"price":200,"priceString":"$2.00","isPieOfTheDay":true},{"id":1,"storeId":4,"displayName":"Beef and curry","quantity":1,"price":280,"priceString":"$2.80","isPieOfTheDay":true},{"id":1,"storeId":6,"displayName":"Beef","quantity":3,"price":230,"priceString":"$2.30","isPieOfTheDay":true},{"id":1,"storeId":7,"displayName":"Beef and mushroom","quantity":1,"price":250,"priceString":"$2.50","isPieOfTheDay":true},{"id":1,"storeId":1,"displayName":"Beef","quantity":5,"price":300,"priceString":"$3.00","isPieOfTheDay":true},{"id":1,"storeId":2,"displayName":"Beef and curry","quantity":1,"price":250,"priceString":"$2.50","isPieOfTheDay":true},{"id":1,"storeId":3,"displayName":"Beef and curry","quantity":1,"price":200,"priceString":"$2.00","isPieOfTheDay":true},{"id":1,"storeId":4,"displayName":"Beef and curry","quantity":1,"price":280,"priceString":"$2.80","isPieOfTheDay":true},{"id":1,"storeId":6,"displayName":"Beef","quantity":3,"price":230,"priceString":"$2.30","isPieOfTheDay":true},{"id":1,"storeId":7,"displayName":"Beef and mushroom","quantity":1,"price":250,"priceString":"$2.50","isPieOfTheDay":true},{"id":1,"storeId":1,"displayName":"Beef","quantity":5,"price":300,"priceString":"$3.00","isPieOfTheDay":true},{"id":1,"storeId":2,"displayName":"Beef and curry","quantity":1,"price":250,"priceString":"$2.50","isPieOfTheDay":true},{"id":1,"storeId":3,"displayName":"Beef and curry","quantity":1,"price":200,"priceString":"$2.00","isPieOfTheDay":true},{"id":1,"storeId":4,"displayName":"Beef and curry","quantity":1,"price":280,"priceString":"$2.80","isPieOfTheDay":true},{"id":1,"storeId":6,"displayName":"Beef","quantity":3,"price":230,"priceString":"$2.30","isPieOfTheDay":true},{"id":1,"storeId":7,"displayName":"Beef and mushroom","quantity":1,"price":250,"priceString":"$2.50","isPieOfTheDay":true}],
         stores: await listStores(),
         error: null
       })
     } catch (error) {
+      // $FlowFixMe - Set error message to state
       this.setState({
         pies: [],
         stores: [],
@@ -98,13 +112,14 @@ class App extends Component {
   }
 
   // When App is loaded, fetch API data
+  // $FlowFixMe - Turn off type annotations
   componentDidMount = () => {
     this.fetchData()
   }
 
   render = () => {
-    // Get variables from app state
-    const { pies, filteredPies, stores, pagination } = this.state
+    // $FlowFixMe - Get variables from app state
+    const { pies, filteredPies, stores, pagination, error } = this.state
     // Limit number of displayed Pies
     const piePage =
       filteredPies.length > 0
@@ -114,7 +129,9 @@ class App extends Component {
     return (
       <div className="App">
         <h1 className="lobster text-center apptitle">
-          <a href='/' className="align-middle">Pie of the Day</a>
+          <a href="/" className="align-middle">
+            Pie of the Day
+          </a>
         </h1>
         <div className="container mt-4">
           {piePage.length > 0 && stores.length > 0 && pies.length > 0 ? (
@@ -131,9 +148,14 @@ class App extends Component {
                 onChangePage={this.onChangePage}
               />
             </div>
+          ) : !error ? (
+            <div className="text-center mt-5">
+              <Icon spin name="spinner" className="display-2 spinner" />
+            </div>
           ) : (
-            <div className='text-center mt-5'>
-              <Icon spin name="spinner" className='display-2 spinner' />
+            <div className="alert alert-danger">
+              <h2>Error</h2>
+              {error.message}
             </div>
           )}
         </div>
