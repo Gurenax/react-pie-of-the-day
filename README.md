@@ -9,6 +9,8 @@ A simple react app for finding the best `Pie of the Day`
 4. HTTP Client
 5. Test Pipeline
 6. Coding Style
+7. Deployment to Netlify
+8. Final Product
 
 
 ## Background and Problem
@@ -45,7 +47,47 @@ The HTTP client of choice for this project is `Axios`. Among all the HTTP client
 
 ## Test Pipeline
 
+The test framework that I used for the project is `Jest` together with `Flow` syntax checker.
 
+### Jest
+
+My tests cover all functions used by the react app which includes API fetches from the Pie API and utility functions such as searching, sorting and retrieving the full address of a store.
+
+Due to my limited knowledge of front-end TDD, I decided not to use Jest for my front-end components. This is something that I would like to improve in the future.
+
+There is also a warning that I could not remove from the jest test of App.js. The message `Warning: Can only update a mounted or mounting component. This usually means you called setState, replaceState, or forceUpdate on an unmounted component. This is a no-op.` is an enigma for me at the moment as this does not usually happen in my previous projects. The reason why it appears in the test is because the state is being set on a catch block from within a function called by `componentDidMount()` and I chose to keep that setState block so I can output errors when there are issues loading my lists.
+![](/docs/images/Jest.png)
+
+
+### Flow
+
+My flow tests are just simple and straightforward but it reinforces my confidence with the syntax and coding style that I adapted. Majority of the flow issues I purposedly ignored are `type annotation errors` and `setState blocks` which look at undefined variables when the components have not yet been mounted.
+
+![](/docs/images/Flow.png)
 
 
 ## Coding Style
+
+The coding style that I adapted and most comfortable with is `ES6 / ES7`. I find that my code is cleaner and more manageable with this syntax.
+
+In addition, I used the `async/await` syntax very widely as I prefer it over numerous amount of `then/catch` Promise blocks.
+
+The coding style for my React components follow a `single smart component / multiple dumb component` pattern. This allows me to manage my state exclusively in App.js.
+
+
+## Deployment to Netlify
+
+
+
+## Final Product
+
+I enjoyed doing this challenge as much as my other projects.
+
+### Desktop
+![](/docs/images/Desktop-Final.png)
+
+### Tablet
+![](/docs/images/Tablet-Final.png)
+
+### Mobile
+![](/docs/images/Mobile-Final.png)
